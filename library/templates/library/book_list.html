@@ -1,0 +1,31 @@
+{% extends 'library/base.html' %}
+{% block content %}
+    <h1 class="mb-4">Book Collection</h1>
+    <a href="{% url 'library:book_add' %}" class="btn btn-primary mb-3">Add New Book</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Published</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.get_genre_display }}</td>
+                <td>{{ book.published_date }}</td>
+                <td>
+                    <a href="{% url 'library:book_detail' book.pk %}" class="btn btn-sm btn-info">View</a>
+                    <a href="{% url 'library:book_edit' book.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'library:book_delete' book.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
